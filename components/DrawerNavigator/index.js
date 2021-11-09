@@ -1,5 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
 import Principal from '../../pages/Principal';
 import Detalle from '../../pages/Detalle';
 import Reservas from '../../pages/Reservas';
