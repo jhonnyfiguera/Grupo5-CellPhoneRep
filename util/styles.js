@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
 		color: "#33A8FF",
 		paddingVertical: 5,
 	  },
-	
-	
-	
+	  linkOlvidaste : {
+		color: "blue",
+	  },
 });
 
 export default styles;
