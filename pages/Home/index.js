@@ -1,9 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
-import {   Text, View, } from "react-native";
+import {
+	ScrollView,
+	Text,
+	View,
+	Button,
+	StatusBar,
+	TextInput,
+	TouchableOpacity,
+	Linking,
+} from 'react-native';
 
 import styles from "../../util/styles";
 
 export default function Home() {
+
+    
     return (
         <View>
             <Text>Imagen de sucursal Colonia</Text>

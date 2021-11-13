@@ -1,11 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "../../util/styles";
-import { Text, TextInput, View, Button, TouchableOpacity } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import {
+	ScrollView,
+	Text,
+	View,
+	Button,
+	StatusBar,
+	TextInput,
+	TouchableOpacity,
+	Linking,
+} from 'react-native';
+
 /* import React, { useEffect, useState } from 'react'; */
 
-export default ({ navigation }) => {
+export default ({ navigation, route}) => {
   /*hooks uno por cada atributo*/
+  const { bienvenido } = route.params || { bienvenido: '' };
   const [name, setName] = useState(""); //En caso de tenerlos no se la pedimos, llega por parametro
   const [phone, setPhone] = useState(""); //En caso de tenerlos no se la pedimos, llega por parametro
   const [email, setEmail] = useState(""); //No se la pedimos, llega por parametro
@@ -13,10 +23,14 @@ export default ({ navigation }) => {
   const [passwordNueva, setPasswordNueva] = useState("");
 
   return (
+    <View style={styles.containerIngreso}>
     <View style={styles.detalle}>
       <StatusBar style={"auto"} />
 
       <Text>Datos personales</Text>
+      <View>
+					<Text>aquiiii {bienvenido} </Text>
+				</View>
 
       <View>
         <Text>Email: {email}</Text>
@@ -88,5 +102,6 @@ export default ({ navigation }) => {
 
       </TouchableOpacity>
     </View>
+       </View>
   );
 };

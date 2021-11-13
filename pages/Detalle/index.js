@@ -1,7 +1,16 @@
 import React from 'react';
 import styles from '../../util/styles';
-import { Text, View, Button } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import {
+	ScrollView,
+	Text,
+	View,
+	Button,
+	StatusBar,
+	TextInput,
+	TouchableOpacity,
+	Linking,
+} from 'react-native';
+
 /* import React, { useEffect, useState } from 'react'; */
 
 export default ({ navigation }) => {
