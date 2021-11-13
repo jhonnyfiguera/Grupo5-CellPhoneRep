@@ -1,92 +1,75 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from "react";
 import {
-	ScrollView,
-	Text,
-	View,
-	Button,
-	StatusBar,
-	TextInput,
-	TouchableOpacity,
-	Linking,
-} from 'react-native';
-import styles from '../../util/styles';
+  ScrollView,
+  Text,
+  View,
+  Button,
+  StatusBar,
+  TextInput,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
+import styles from "../../util/styles";
+import GlobalContext, { authData } from "../../components/context";
+import * as Google from "expo-auth-session/providers/google";
+import DrawerNavigator from "../../components/DrawerNavigator";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function Login({ navigation }) {
-	const [bienvenido, setBienvenido] = useState('Hoooolllaaaaaaa Bienvenidx...');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+  //const [bienvenido, setBienvenido] = useState('Hoooolllaaaaaaa Bienvenidx...');
+  //const [email, setEmail] = useState('');
+  //const [password, setPassword] = useState('');
 
-	return (
-		<View style={styles.containerIngreso}>
-			<View style={styles.principal}>
-				<StatusBar style="auto" />
+  const { AuthData, setAuthData } = useContext(GlobalContext);
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    expoClientId:
+      "923761599304-fpugfprro1rr9e9hoeucgouhl8ahm6pi.apps.googleusercontent.com",
+    iosClientId:
+      "923761599304-41hkeh1v3umtl2ntm5vht4j8ld9ch2sv.apps.googleusercontent.com",
+    androidClientId: "GOOGLE_GUID.apps.googleusercontent.com",
+    webClientId: "GOOGLE_GUID.apps.googleusercontent.com",
+  });
 
-				{/*NECESITO AGREGAR STYLES*/}
+  React.useEffect(() => {
+    if (response?.type === "success") {
+      const { authentication } = response;
+      // llamar a la API de google para traerme info del usuario
+      fetch(
+        `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${authentication.accessToken}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const { name, email, token, telefono } = data;
+          setAuthData({ ...AuthData, name: name, email: email });
+        });
+    }
+  }, [response]);
 
-				<Text>CellPhone Reparaciones</Text>
-
-				<TextInput
-					style={styles.contenedorRow}
-					value={email}
-					onChangeText={(text) => setEmail(text)}
-					placeholder="Ingresa tu mail"
-					keyboardType="email-address"
-				/>
-				<TextInput
-					style={styles.contenedorRow}
-					value={password}
-					secureTextEntry={true}
-					onChangeText={(text) => setPassword(text)}
-					placeholder="Ingresa tu contraseña"
-				/>
-
-				<TouchableOpacity
-					style={styles.containerBoton}
-					onPress={() => {
-						navigation.navigate('TopTabsNavigator', { bienvenido: bienvenido, email:email }); //Ojo le paso el parametro si quiero por la pagina
-					}}
-				>
-					<View style={styles.boton}>
-						<Text style={styles.textoBoton}> Ingresar</Text>
-					</View>
-				</TouchableOpacity>
-
-				<TouchableOpacity
-					style={styles.containerBoton}
-					onPress={() => {
-						/* registrar(), startLoading(); */
-					}}
-				>
-					<View style={styles.boton}>
-						<Text style={styles.textoBoton}> Registrarme</Text>
-					</View>
-				</TouchableOpacity>
-
-				<TouchableOpacity
-					style={styles.containerBoton}
-					onPress={() => {
-						/* registrar(), startLoading(); */
-					}}
-				>
-					<View style={styles.boton}>
-						<Text style={styles.textoBoton}> Continuar con Google</Text>
-					</View>
-				</TouchableOpacity>
-
-				<Text
-					style={styles.linkOlvidaste}
-					onPress={() => Linking.openURL('https://www.google.com/?gws_rd=ssl')}
-				>
-					¿Olvidaste tu contraseña?
-				</Text>
-
-				<View>
-					<Text>En CellPhone ofrecemos un servicio de reparación de celulares</Text>
-				</View>
-				<View>
-					<Text> Integrantes: Jhonny, Patricia y Daisuke</Text>
-				</View>
-			</View>
-		</View>
-	);
+  return (
+    <GlobalContext.Provider value={authData}>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        { !authData.name ? (
+          <View>
+            <Text>CellPhone Reparaciones</Text>
+            <Button
+              disabled={!request}
+              title="Login"
+              onPress={() => {
+                promptAsync();
+              }}
+            />
+            <Button
+              title="Registrarme"
+              onPress={() => {
+                navigation.navigate("Registrarme");
+              }}
+            />
+          </View>
+        ) : (
+            <View><Text>Una vez logueado</Text></View>
+        )}
+      </View>
+    </GlobalContext.Provider>
+  );
 }
