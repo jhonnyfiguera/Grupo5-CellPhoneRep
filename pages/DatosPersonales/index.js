@@ -1,88 +1,65 @@
-import React, { useEffect, useState, useContext } from "react";
-import styles from "../../util/styles";
-import {
-  ScrollView,
-  Text,
-  View,
-  Button,
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
-  Linking,
-} from "react-native";
-import Globalcontext, { authData } from "../../components/context";
+import React, { useState, useContext } from 'react';
+import { ScrollView, Text, View, Button, StatusBar, TextInput } from 'react-native';
+import styles from '../../util/styles';
+import Globalcontext from '../../components/context';
 
 export default ({ navigation }) => {
-  /*hooks uno por cada atributo*/
-  const { AuthData, setAuthData } = useContext(Globalcontext);
-  const [nombre, setNombre] = useState(AuthData.name); //En caso de tenerlos no se la pedimos, llega por parametro
-  const [email, setEmail] = useState(AuthData.mail); //No se la pedimos, llega por parametro
-  const [telefono, setTelefono] = useState(AuthData.phone); //No se la pedimos, llega por parametro
+	const { DataAuth, setDataAuth } = useContext(Globalcontext);
+	const [name, setName] = useState(DataAuth.name);
+	const [email, setEmail] = useState(DataAuth.email);
+	const [phone, setPhone] = useState(DataAuth.phone);
 
-  return (
-    <View style={styles.containerIngreso}>
-      <View style={styles.detalle}>
-        <StatusBar style={"auto"} />
+	return (
+		<ScrollView>
+			<View style={styles.container}>
+				<StatusBar style={'auto'} />
 
-        <Text>Datos personales</Text>
+				<Text></Text>
+				<Text style={styles.titleCellPhone}>Datos personales en CellPhone </Text>
 
-        <View>
-          <Text>Nombre y Apellido: {nombre}</Text>
-        </View>
+				<Text></Text>
+				<Text></Text>
+				<Text>Nombre y Apellido: {name}</Text>
 
-        <View>
-          <Text>Email: {email}</Text>
-        </View>
+				<Text></Text>
+				<Text></Text>
+				<Text>Email: {email}</Text>
 
-        <View>
-          {telefono !== undefined ? (
-            <View>
-              <Text>Teléfono: {telefono}</Text>
-            </View>
-          ) : (
-            <View>
-              <TextInput
-                value={telefono}
-                onChangeText={setTelefono}
-                placeholder="Ingresa tu teléfono"
-              />
-            </View>
-          )}
-        </View>
+				<Text></Text>
+				<Text></Text>
+				{phone !== undefined ? (
+					<Text>Teléfono: {phone}</Text>
+				) : (
+					<Text>Teléfono: Te invitamos a registrar tu telefono</Text>
+				)}
 
-        <TouchableOpacity
-          style={styles.containerBoton}
-          onPress={() => {
-            setAuthData({...AuthData, telefono})
-          }}
-        >
-          <View style={styles.boton}>
-            <Text style={styles.textoBoton}>Guardar Cambios</Text>
-          </View>
-        </TouchableOpacity>
+				<Text></Text>
+				<Text></Text>
+				<Text style={styles.titleCellPhone}>Actualiza tus datos </Text>
 
-        <Text>Cambiar contraseña</Text>
+				<Text></Text>
+				<Text></Text>
+				<TextInput value={phone} onChangeText={setPhone} placeholder="Ingresa tu teléfono" />
 
-        <View>
-          <TextInput
-            secureTextEntry={true}
-            onChangeText={(text) => setPasswordNueva(text)}
-            value={passwordNueva}
-            placeholder="Nueva contraseña"
-          />
-        </View>
+				<Text></Text>
+				<Text></Text>
+				<Button
+					title="Guardar"
+					onPress={() => {
+						setDataAuth({ ...DataAuth, name, phone });
+						alert('Se efectuaron los cambios');
+					}}
+				/>
 
-        <TouchableOpacity
-          style={styles.containerBoton}
-          onPress={() => {
-            /* guardarCambios(), startLoading(); */
-          }}
-        >
-          <View style={styles.boton}>
-            <Text style={styles.textoBoton}>Guardar Cambios</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+				<Text></Text>
+				<Text></Text>
+				<Button
+					title="Salir"
+					onPress={() => {
+						setDataAuth({});
+					}}
+				/>
+			</View>
+		</ScrollView>
+	);
 };

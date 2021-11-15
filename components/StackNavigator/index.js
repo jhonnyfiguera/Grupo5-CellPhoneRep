@@ -1,18 +1,29 @@
-import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import GlobalContext from '../context';
 import Login from '../../pages/Login';
-import Registrarme from '../../pages/Registrarme';
+import TopTabsNavigator from '../TopTabsNavigator';
 
+//Componente
 export default function StackNavigator() {
+	const [DataAuth, setDataAuth] = useState({});
 
-    // const [state, setstate] = useState(initialState)
-    const Stack = createStackNavigator()
-  
-    return (
-        <Stack.Navigator initialRouteName={'Login'}>
-          <Stack.Screen name={'Login'} component={Login}/>
-          <Stack.Screen name={'Registrarme'} component={Registrarme}/>          
-        </Stack.Navigator>
-    );
-  }
+	const Stack = createStackNavigator();
+
+	const isAuthenticated = () => DataAuth.email !== undefined;
+
+	return (
+		<GlobalContext.Provider value={{ DataAuth, setDataAuth }}>
+
+			{ (isAuthenticated()) ? (
+				<Stack.Navigator>
+					<Stack.Screen name={'TopTabsNavigator'} component={TopTabsNavigator} options={{headerShown: false}} />
+				</Stack.Navigator>
+			) : (
+				<Stack.Navigator>
+					<Stack.Screen name={'Login'} component={Login}  options={{headerShown: false}}/>
+				</Stack.Navigator>
+			)}
+		</GlobalContext.Provider>
+	);
+}
