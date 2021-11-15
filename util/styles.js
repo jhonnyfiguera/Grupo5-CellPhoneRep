@@ -6,7 +6,16 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
-	  },
+	},
+	titleCellPhone: {
+		fontSize: 25,
+		color: '#0000ff',
+	},
+	LoginGoogle: {
+		resizeMode: 'stretch',
+		width: 200,
+		height: 58,
+	},
 	principal: {
 		flex: 1,
 		backgroundColor: '#f0f8ff',
@@ -35,48 +44,48 @@ const styles = StyleSheet.create({
 	},
 	contenedorRow: {
 		flex: 1,
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "center",
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
 		marginTop: 10,
 		marginBottom: 10,
-	  },
-	  contenedorSignin: {
+	},
+	contenedorSignin: {
 		paddingTop: 80,
 		flex: 1,
-	  },
-	  containerIngreso: {
+	},
+	containerIngreso: {
 		paddingTop: 15,
 		marginTop: 30,
-	  },
-	  containerBoton: {
-		alignItems: "center",
+	},
+	containerBoton: {
+		alignItems: 'center',
 		marginTop: 10,
-	  },
-	  textoBoton: {
-		color: "white",
+	},
+	textoBoton: {
+		color: 'white',
 		fontSize: 15,
-	  },
-	  boton: {
+	},
+	boton: {
 		width: 200,
 		height: 40,
-		backgroundColor: "#00AAE4",
-		alignItems: "center",
-		justifyContent: "center",
+		backgroundColor: '#00AAE4',
+		alignItems: 'center',
+		justifyContent: 'center',
 		marginTop: 10,
 		marginBottom: 10,
 		borderWidth: 1,
 		borderRadius: 10,
-	  },
-	  link: {
+	},
+	link: {
 		marginTop: 30,
 		fontSize: 18,
-		color: "#33A8FF",
+		color: '#33A8FF',
 		paddingVertical: 5,
-	  },
-	  linkOlvidaste : {
-		color: "blue",
-	  },
+	},
+	linkOlvidaste: {
+		color: 'blue',
+	},
 });
 
 export default styles;

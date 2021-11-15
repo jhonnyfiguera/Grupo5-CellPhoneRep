@@ -1,63 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
-  FlatList,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-  Button
-} from "react-native";
-
-import { Constants } from "../../util/constants";
-import styles from "../../util/styles";
-
+	ScrollView,
+	FlatList,
+	StatusBar,
+	Text,
+	TouchableOpacity,
+	View,
+	Button,
+} from 'react-native';
+import { Constants } from '../../util/constants';
+import styles from '../../util/styles';
 
 export default ({ navigation }) => {
-  const [vehiculos, setVehiculos] = useState([]);
+	const [reservas, setReservas] = useState([]);
 
-  const cargarVehiculos = () => {
-    fetch(`${Constants.BASE_URL}/read`)
-      .then((res) => res.json()) // tratamiento de data para convertirlo en un json
-      .then((data) => {
-        // console.log(data)
+	const cargarReservas = () => {
+		fetch(`${Constants.BASE_URL}/read`)
+			.then((res) => res.json()) // tratamiento de data para convertirlo en un json
+			.then((data) => {
+				setReservas(data);
+			});
+	};
 
-        setVehiculos(data);
-      });
-  };
+	useEffect(() => {
+		// tengo que ir a buscar los vehiculos
+		cargarReservas();
+	}, []);
 
-  useEffect(() => {
-    // tengo que ir a buscar los vehiculos
-    cargarVehiculos();
-  }, []);
+	return (
+		<ScrollView>
+			<View style={styles.container}>
+				<StatusBar style={'auto'} />
 
-  return (
-    <View style={styles.reserva}>
-      <StatusBar style={"auto"} />
+				<Text></Text>
+				<Text></Text>
+				<Button
+					title={'Nueva Reserva'}
+					onPress={() => {
+						navigation.navigate('NuevaReserva');
+					}}
+				/>
 
-    
-      <Button
-        title={"Nueva Reserva"}
-        onPress={() => {
-          navigation.navigate("NuevaReserva");
-        }}
-      />
+				<Text></Text>
 
-      <FlatList
-        data={vehiculos}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Details", { id: item.id })}
-            >
-              <View style={styles.vehiculo}>
-                <Text>
-                  {item.marca} - {item.modelo}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </View>
-  );
-}
+				<Button
+					title="Salir"
+					onPress={() => {
+						setDataAuth({});
+					}}
+				/>
+
+				<Text></Text>
+				<Text></Text>
+
+				<FlatList
+					data={reservas}
+					renderItem={({ item }) => {
+						return (
+							<TouchableOpacity onPress={() => navigation.navigate('Detalle', { id: item.id })}>
+								<View>
+									<Text>
+										{item.marca} - {item.modelo}
+									</Text>
+								</View>
+							</TouchableOpacity>
+						);
+					}}
+				/>
+			</View>
+		</ScrollView>
+	);
+};
