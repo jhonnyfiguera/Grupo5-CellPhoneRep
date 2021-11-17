@@ -23,7 +23,7 @@ export default function Home({ navigation }) {
 				<Text>Imagen de sucursal Colonia</Text>
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
 					<Image
-						source={require('../../assets/phoneCuatro.png')}
+						source={require('../../assets/sucursalColonia.jpeg')}
 						style={styles.LoginGoogle}
 					/>
 				</TouchableOpacity>
@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
 				<Text>Imagen de sucursal Mercedes</Text>
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
 					<Image
-						source={require('../../assets/phoneTres.png')}
+						source={require('../../assets/sucursalMercedes.jpeg')}
 						style={styles.LoginGoogle}
 					/>
 				</TouchableOpacity>
@@ -59,9 +59,7 @@ export default function Home({ navigation }) {
 					/>
 				</TouchableOpacity>
 
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
+				<br></br>
 
 				<Button
 					title="Salir"
