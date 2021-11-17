@@ -1,130 +1,162 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import {
-	ScrollView,
-	Text,
-	View,
-	Button,
-	StatusBar,
-	TextInput,
-	TouchableOpacity,
-	Linking,
-	Image,
-} from 'react-native';
-import styles from '../../util/styles';
-import GlobalContext from '../../components/context';
-import * as Google from 'expo-auth-session/providers/google';
+  ScrollView,
+  Text,
+  View,
+  Button,
+  StatusBar,
+  TextInput,
+  TouchableOpacity,
+  Linking,
+  Image,
+  Alert,
+} from "react-native";
+import styles from "../../util/styles";
+import GlobalContext from "../../components/context";
+import * as Google from "expo-auth-session/providers/google";
 
 //Componente
 export default function Login({ navigation }) {
-	// Hook propios del componente
-	const [inputEmail, setInputEmail] = useState('');
-	const [inputPassword, setInputPassword] = useState('');
+  // Hook propios del componente
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
 
-	// Destructuro lo que me envio el Globla Provaider
-	const { DataAuth, setDataAuth } = useContext(GlobalContext);
-	console.log('111.222.... Siguen Valores iniciales de DataAuth Vacio???' + DataAuth);
+  // Destructuro lo que me envio el Globla Provaider
+  const { DataAuth, setDataAuth } = useContext(GlobalContext);
+  console.log(
+    "111.222.... Siguen Valores iniciales de DataAuth Vacio???" + DataAuth
+  );
 
-	//Hoock Google
-	const [request, response, promptAsync] = Google.useAuthRequest({
-		//Pato expoClientId: 923761599304-fpugfprro1rr9e9hoeucgouhl8ahm6pi.apps.googleusercontent.com
-		expoClientId: '705375110728-j1tuq48g14hm1ntuinrge9ds5i5n6ugq.apps.googleusercontent.com',
-		iosClientId: '923761599304-41hkeh1v3umtl2ntm5vht4j8ld9ch2sv.apps.googleusercontent.com',
-		androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-		webClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-	});
+  //Hoock Google
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    //Pato expoClientId: 923761599304-fpugfprro1rr9e9hoeucgouhl8ahm6pi.apps.googleusercontent.com
+    expoClientId:
+      "705375110728-j1tuq48g14hm1ntuinrge9ds5i5n6ugq.apps.googleusercontent.com",
+    iosClientId:
+      "923761599304-41hkeh1v3umtl2ntm5vht4j8ld9ch2sv.apps.googleusercontent.com",
+    androidClientId: "GOOGLE_GUID.apps.googleusercontent.com",
+    webClientId: "GOOGLE_GUID.apps.googleusercontent.com",
+  });
 
-	/**React.useEffect */
-	useEffect(() => {
-		if (response?.type === 'success') {
-			const { authentication } = response;
+  /**React.useEffect */
+  useEffect(() => {
+    if (response?.type === "success") {
+      const { authentication } = response;
 
-			const { token } = authentication;
-			setDataAuth({ ...DataAuth, token });
+      const { token } = authentication;
+      setDataAuth({ ...DataAuth, token });
 
-			//  API google para traerme info del usuario
-			fetch(
-				`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${authentication.accessToken}`,
-			)
-				.then((res) => res.json())
-				.then((data) => {
-					const { name, email } = data;
-					setDataAuth({ ...DataAuth, name, email });
-				});
-		}
-	}, [response]);
+      //  API google para traerme info del usuario
+      fetch(
+        `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${authentication.accessToken}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const { name, email } = data;
+          setDataAuth({ ...DataAuth, name, email });
+        });
+    }
+  }, [response]);
 
-	return (
-		<ScrollView>
-			<View style={styles.container}>
-				<StatusBar style="auto" />
+  const validateEmail = (email) => {
+    let re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
 
-				<Text></Text>
-				<Text style={styles.titleCellPhone}>Bienvenid@ a CellPhone </Text>
-				<Text>Servicio de reparacion de celulares...</Text>
+  const validatePassword = (password) => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))/;
+    return re.test(password);
+  };
 
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
 
-				<TextInput value={inputEmail} onChangeText={setInputEmail} placeholder="Ingresar email" />
+        <br></br>
 
-				<TextInput
-					value={inputPassword}
-					onChangeText={setInputPassword}
-					placeholder="Ingresar password"
-				/>
+        <Text style={styles.titleCellPhone}>Bienvenid@ a CellPhone </Text>
+        <Text>Servicio de reparacion de celulares...</Text>
 
-				<Button
-					title="Ingresar"
-					onPress={() => {
-						setDataAuth({ ...DataAuth, email: inputEmail, password: inputPassword });
-					}}
-				/>
+        <br></br>
+        <br></br>
+        <br></br>
 
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
+        <TextInput
+          value={inputEmail}
+          onChangeText={setInputEmail}
+          placeholder="Ingresar email"
+        />
 
-				<Button
-					title="Registrarme con google"
-					onPress={() =>
-						Linking.openURL(
-							'https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp',
-						)
-					}
-					//Verificar como hacer para volver a la app
-				/>
+        <TextInput
+          value={inputPassword}
+          onChangeText={setInputPassword}
+          placeholder="Ingresar password"
+        />
 
-				<Text></Text>
+		<br></br>
+        <Button
+          title="Ingresar"
+          onPress={() => {
+            if (!validateEmail(inputEmail)) {
+              Alert.alert("Debes ingresar mail valido");
+            } else if (!validatePassword(inputPassword)) {
+              Alert.alert("Debes ingresar una password valida");
+            } else {
+              setDataAuth({
+                ...DataAuth,
+                email: inputEmail,
+                password: inputPassword,
+              });
+            }
+          }}
+        />
 
-				<TouchableOpacity
-					disabled={!request}
-					activeOpacity={0.5}
-					onPress={() => {
-						promptAsync();
-					}}
-				>
-					<Image
-						source={require('../../assets/google-signin-button-1024x260.png')}
-						style={styles.LoginGoogle}
-					/>
-				</TouchableOpacity>
+        <br></br>
 
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
-				<Text></Text>
+        <Button
+          title="Registrar"
+          onPress={() => {
+            if (!validateEmail(inputEmail)) {
+              Alert.alert('Debes ingresar mail valido');
+            } else if (!validatePassword(inputPassword)) {
+              Alert.alert("Debes ingresar una password valida");
+            } else {
+              setDataAuth({
+                ...DataAuth,
+                email: inputEmail,
+                password: inputPassword,
+              });
+            }
+          }}
+        />
 
-				<Text>Jhonny Figuera</Text>
-				<Text>Daisuke Miyashiro</Text>
-				<Text>Patricia Rodriguez</Text>
-			</View>
-		</ScrollView>
-	);
+        <Text>Para ingresar o registrarse con google</Text>
+
+        <br></br>
+
+        <TouchableOpacity
+          disabled={!request}
+          activeOpacity={0.5}
+          onPress={() => {
+            promptAsync();
+          }}
+        >
+          <Image
+            source={require("../../assets/continuarConGoogle.png")}
+            style={styles.LoginGoogle}
+          />
+        </TouchableOpacity>
+
+        <br></br>
+        <br></br>
+        <br></br>
+
+        <Text>Jhonny Figuera</Text>
+        <Text>Daisuke Miyashiro</Text>
+        <Text>Patricia Rodriguez</Text>
+      </View>
+    </ScrollView>
+  );
 }
