@@ -5,8 +5,8 @@ import Globalcontext from '../../components/context';
 
 export default () => {
 	const { DataAuth, setDataAuth } = useContext(Globalcontext);
-	const [name, setName] = useState(DataAuth.name);
-	const [phone, setPhone] = useState(DataAuth.phone);
+	const [name, setName] = useState("");
+	const [phone, setPhone] = useState("");
 
 	return (
 		<ScrollView>
@@ -21,14 +21,7 @@ export default () => {
 				<Text />
 				<Text />
 				<Text />
-				{DataAuth.name !== undefined ? (
-					<Text>{DataAuth.name}</Text>
-				) : (
-					<TextInput 
-            value={name} 
-            onChangeText={setName} 
-            placeholder="Ingresar Nombre y Apellido" />
-				)}
+				<Text>Nombre y Apellido: {DataAuth.name}</Text>
 
 				<Text />
 				<Text />
@@ -38,16 +31,32 @@ export default () => {
 				<Text />
 				<Text />
 				<Text />
-				{DataAuth.phone !== undefined ? (
-					<Text>{DataAuth.phone}</Text>
-				) : (
-					<TextInput 
-            value={phone} 
-            onChangeText={setPhone} 
-            placeholder="Ingresa tu numero" />
-				)}
+				<Text>Telefono: {DataAuth.phone}</Text>
 
 				<Text />
+				<Text />
+				<Text />
+				<Text />
+
+				<Button
+					title="Salir"
+					onPress={() => {
+						setDataAuth({});
+					}}
+				/>
+
+				<Text style={styles.placeholder}></Text>
+				<Text> Actualiza tus datos</Text>
+				<Text />
+
+				<TextInput value={name} onChangeText={setName} placeholder="Cambiar Nombre y Apellido" />
+
+				<Text />
+
+				<TextInput value={phone} onChangeText={setPhone} placeholder="Ingresa tu numero" />
+
+				<Text />
+
 				<Button
 					title="Guardar cambios"
 					onPress={() => {
@@ -57,12 +66,6 @@ export default () => {
 				/>
 
 				<Text />
-				<Button
-					title="Salir"
-					onPress={() => {
-						setDataAuth({});
-					}}
-				/>
 			</View>
 		</ScrollView>
 	);

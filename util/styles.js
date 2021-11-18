@@ -26,11 +26,16 @@ const styles = StyleSheet.create({
 		width: 350,
 		borderBottomWidth: 1,
 		marginVertical: 30,
-		alignContent: "center",
+		alignContent: 'center',
 		marginLeft: 25,
 		marginRight: 25,
 		marginTop: 30,
-	  },	
+	},
+	listaReserva: {
+		padding: 15,
+		borderBottomWidth: 1,
+		// marginTop: 1
+	},
 	principal: {
 		flex: 1,
 		backgroundColor: '#f0f8ff',
