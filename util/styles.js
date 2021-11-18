@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
 		fontSize: 25,
 		color: '#0000ff',
 	},
+	titleSecondary: {
+		fontSize: 20,
+		color: '#0000ff',
+	},
 	LoginGoogle: {
 		resizeMode: 'stretch',
 		width: 250,

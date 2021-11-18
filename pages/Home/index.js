@@ -14,7 +14,7 @@ export default function Home() {
 				<Text />
 				<Text />
 				<Text />
-				<Text>Bienvenidxs {DataAuth.name}</Text>
+				<Text style={styles.titleCellPhone}>Bienvenid@ {DataAuth.name}</Text>
 
 				<Text />
 				<Text />
@@ -23,17 +23,17 @@ export default function Home() {
 				<Text>Sucursal Colonia</Text>
 				<Text />
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image source={require('../../assets/phoneCuatro.png')} style={styles.ImageHome} />
+					<Image source={require('../../assets/sucursalColonia.png')} style={styles.ImageHome} />
 				</TouchableOpacity>
 
 				<Text />
 				<Text />
 				<Text />
 
-				<Text>Ssucursal Mercedes</Text>
+				<Text>Sucursal Mercedes</Text>
 				<Text />
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image source={require('../../assets/phoneTres.png')} style={styles.ImageHome} />
+					<Image source={require('../../assets/sucursalMercedes.png')} style={styles.ImageHome} />
 				</TouchableOpacity>
 
 				<Text />
