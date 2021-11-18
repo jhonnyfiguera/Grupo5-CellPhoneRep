@@ -6,6 +6,7 @@ import { Constants } from '../../util/constants';
 
 export default ({ navigation, route }) => {
 
+	//Queda pendiente
 	const { id } = route.params || { id: '' };
 	const [reserva, setReserva] = useState([]);
 	const { DataAuth, setDataAuth } = useContext(GlobalContext);

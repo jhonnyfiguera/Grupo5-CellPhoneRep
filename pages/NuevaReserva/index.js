@@ -10,7 +10,7 @@ export default function NuevaReserva({ navigation }) {
 	return (
 		<ScrollView>
 			<View>
-				<Text>Hola pagina nueva reserva </Text>
+				<Text>Hola pagina nueva reserva queda pendiente </Text>
 			</View>
 		</ScrollView>
 	);
