@@ -3,7 +3,12 @@ import {ScrollView,Text,View,Button,StatusBar,TextInput, TouchableOpacity, Linki
 
 import styles from '../../util/styles';
 
-export default ({ navigation, route }) => {
+export default ({ route }) => {
+
+	const { id } = route.params || { id: '' }
+
+
+
 	return (
 		<ScrollView>
 
@@ -12,18 +17,6 @@ export default ({ navigation, route }) => {
 				<StatusBar style={'auto'} />
 
 				<Text>Pagina DETALLE...</Text>
-
-				<View>
-					<Text>Pagina Detalle...</Text>
-				</View>
-
-				<View>
-					<Text>Pagina Detalle...</Text>
-				</View>
-
-				<View>
-					<Text>Pagina Detalle...</Text>
-				</View>
 
 				<Button
 					title={'Mis Reservas'}

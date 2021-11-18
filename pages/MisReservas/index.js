@@ -14,16 +14,18 @@ import styles from '../../util/styles';
 export default ({ navigation }) => {
 	const [reservas, setReservas] = useState([]);
 
+	//http://localhost:3000/api/reservations/
+
 	const cargarReservas = () => {
-		fetch(`${Constants.BASE_URL}/read`)
-			.then((res) => res.json()) // tratamiento de data para convertirlo en un json
+		//fetch(`${Constants.BASE_URL}/read`)
+		fetch('http://localhost:3000/api/reservations/')
+			.then((res) => res.json())
 			.then((data) => {
 				setReservas(data);
 			});
 	};
 
 	useEffect(() => {
-		// tengo que ir a buscar los vehiculos
 		cargarReservas();
 	}, []);
 
@@ -32,8 +34,9 @@ export default ({ navigation }) => {
 			<View style={styles.container}>
 				<StatusBar style={'auto'} />
 
-				<Text></Text>
-				<Text></Text>
+				<Text />
+				<Text />
+				<Text />
 				<Button
 					title={'Nueva Reserva'}
 					onPress={() => {
@@ -41,7 +44,9 @@ export default ({ navigation }) => {
 					}}
 				/>
 
-				<Text></Text>
+				<Text />
+				<Text />
+				<Text />
 
 				<Button
 					title="Salir"
@@ -49,18 +54,20 @@ export default ({ navigation }) => {
 						setDataAuth({});
 					}}
 				/>
-
-				<Text></Text>
-				<Text></Text>
+				<Text />
+				<Text />
+				<Text />
 
 				<FlatList
 					data={reservas}
 					renderItem={({ item }) => {
 						return (
-							<TouchableOpacity onPress={() => navigation.navigate('Detalle', { id: item.id })}>
+							<TouchableOpacity 
+								onPress={() => navigation.navigate('Detalle', { id: item.id })}>
 								<View>
 									<Text>
-										{item.marca} - {item.modelo}
+										{/* {item.marca} - {item.modelo} */}
+										{item.tipoCelular} - {item.tipoReparacion}
 									</Text>
 								</View>
 							</TouchableOpacity>

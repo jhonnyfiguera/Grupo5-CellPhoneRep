@@ -1,79 +1,69 @@
-import React, { useState, useContext } from "react";
-import {
-  ScrollView,
-  Text,
-  View,
-  Button,
-  StatusBar,
-  TextInput,
-} from "react-native";
-import styles from "../../util/styles";
-import Globalcontext from "../../components/context";
+import React, { useState, useContext } from 'react';
+import { ScrollView, Text, View, Button, StatusBar, TextInput, Alert } from 'react-native';
+import styles from '../../util/styles';
+import Globalcontext from '../../components/context';
 
-export default ({ navigation }) => {
-  const { DataAuth, setDataAuth } = useContext(Globalcontext);
-  const [name, setName] = useState(DataAuth.name);
-  const [email, setEmail] = useState(DataAuth.email);
-  const [phone, setPhone] = useState(DataAuth.phone);
+export default () => {
+	const { DataAuth, setDataAuth } = useContext(Globalcontext);
+	const [name, setName] = useState(DataAuth.name);
+	const [phone, setPhone] = useState(DataAuth.phone);
 
-  return (
-    <ScrollView>
-      <View style={styles.container}>
-        <StatusBar style={"auto"} />
+	return (
+		<ScrollView>
+			<View style={styles.container}>
+				<StatusBar style={'auto'} />
 
-        <Text></Text>
-        <Text style={styles.titleCellPhone}>
-          Mis datos{" "}
-        </Text>
+				<Text />
+				<Text />
+				<Text />
+				<Text style={styles.titleCellPhone}>Mis Datos</Text>
 
-        <br></br>
+				<Text />
+				<Text />
+				<Text />
+				{DataAuth.name !== undefined ? (
+					<Text>{DataAuth.name}</Text>
+				) : (
+					<TextInput 
+            value={name} 
+            onChangeText={setName} 
+            placeholder="Ingresar Nombre y Apellido" />
+				)}
 
-        <TextInput
-          value={name}
-          onChangeText={setName}
-          placeholder="Nombre y Apellido"
-        />
+				<Text />
+				<Text />
+				<Text />
+				<Text>{DataAuth.email}</Text>
 
-        <TextInput value={email} disabled placeholder="Nombre y Apellido" />
+				<Text />
+				<Text />
+				<Text />
+				{DataAuth.phone !== undefined ? (
+					<Text>{DataAuth.phone}</Text>
+				) : (
+					<TextInput 
+            value={phone} 
+            onChangeText={setPhone} 
+            placeholder="Ingresa tu numero" />
+				)}
 
-        <TextInput
-          value={phone}
-          onChangeText={setPhone}
-          placeholder="Teléfono"
-        />
+				<Text />
+				<Button
+					title="Guardar cambios"
+					onPress={() => {
+						setDataAuth({ ...DataAuth, name, phone });
+						Alert.alert('Oka', 'Se efectuaron los cambios');
+					}}
+				/>
 
-        <br></br>
-
-        {/** 
-				<Text style={styles.titleCellPhone}>Actualiza tus datos </Text>
-
-				<br></br>
-				<br></br>
-
-				{ (name !== undefined) ? <Text/>
-					: (<TextInput value={name} onChangeText={setName} placeholder="Ingresa tu Nombre y Apellido" />)
-				}
-				
-				<TextInput value={phone} onChangeText={setPhone} placeholder="Ingresa tu teléfono" />
-
-				<br></br>
-				*/}
-        <Button
-          title="Guardar cambios"
-          onPress={() => {
-            setDataAuth({ ...DataAuth, name, phone });
-            alert("Se efectuaron los cambios");
-          }}
-        />
-
-        <br></br>
-        <Button
-          title="Salir"
-          onPress={() => {
-            setDataAuth({});
-          }}
-        />
-      </View>
-    </ScrollView>
-  );
+				<Text />
+				<Button
+					title="Salir"
+					onPress={() => {
+						setDataAuth({});
+					}}
+				/>
+			</View>
+		</ScrollView>
+	);
 };
