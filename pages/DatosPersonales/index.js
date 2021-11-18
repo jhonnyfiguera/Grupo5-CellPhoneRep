@@ -21,20 +21,38 @@ export default () => {
 				<Text />
 				<Text />
 				<Text />
-				<Text>Nombre y Apellido: {DataAuth.name}</Text>
+				<Text>Nombre completo: {DataAuth.name}</Text>
 
 				<Text />
 				<Text />
-				<Text />
-				<Text>{DataAuth.email}</Text>
+				<Text>Email: {DataAuth.email}</Text>
 
 				<Text />
 				<Text />
+				<Text>Teléfono: {DataAuth.phone}</Text>
+
+				<Text style={styles.placeholder}></Text>
+				<Text style={styles.titleSecondary}> Actualiza tus datos</Text>
 				<Text />
-				<Text>Telefono: {DataAuth.phone}</Text>
+
+				<TextInput value={name} onChangeText={setName} placeholder="Nombre completo" />
 
 				<Text />
+
+				<TextInput value={phone} onChangeText={setPhone} placeholder="Teléfono" />
+
 				<Text />
+
+				<Button
+					title="Guardar cambios"
+					onPress={() => {
+						setDataAuth({ ...DataAuth, name, phone });
+						setName('');
+						setPhone('');
+						Alert.alert('Oka', 'Se efectuaron los cambios');
+					}}
+				/>
+
 				<Text />
 				<Text />
 
@@ -45,27 +63,6 @@ export default () => {
 					}}
 				/>
 
-				<Text style={styles.placeholder}></Text>
-				<Text> Actualiza tus datos</Text>
-				<Text />
-
-				<TextInput value={name} onChangeText={setName} placeholder="Cambiar Nombre y Apellido" />
-
-				<Text />
-
-				<TextInput value={phone} onChangeText={setPhone} placeholder="Ingresa tu numero" />
-
-				<Text />
-
-				<Button
-					title="Guardar cambios"
-					onPress={() => {
-						setDataAuth({ ...DataAuth, name, phone });
-						Alert.alert('Oka', 'Se efectuaron los cambios');
-					}}
-				/>
-
-				<Text />
 			</View>
 		</ScrollView>
 	);

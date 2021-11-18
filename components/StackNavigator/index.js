@@ -26,12 +26,12 @@ export default function StackNavigator() {
 					<Stack.Screen
 						name={'NuevaReserva'}
 						component={NuevaReserva}
-						options={{ title: 'Mis reservas' }}
+						options={{ title: 'Volver' }}
 					/>
 					<Stack.Screen
 						name={'MisReservas'}
 						component={MisReservas}
-						options={{ title: 'xxxx' }}
+						options={{ title: 'Mis Reservas' }}
 					/>
 					<Stack.Screen 
 						name={'Detalle'} 
