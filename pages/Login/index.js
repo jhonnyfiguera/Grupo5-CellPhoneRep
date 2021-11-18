@@ -4,8 +4,7 @@ import styles from "../../util/styles";
 import GlobalContext from "../../components/context";
 import * as Google from "expo-auth-session/providers/google";
 
-export default function Login({ navigation }) {
-
+export default function Login() {
 	const [inputEmail, setInputEmail] = useState('');
 	const [inputPassword, setInputPassword] = useState('');
 	const { DataAuth, setDataAuth } = useContext(GlobalContext);
@@ -20,13 +19,14 @@ export default function Login({ navigation }) {
 
 	useEffect(() => {
 		if (response?.type === 'success') {
-
 			const { authentication } = response;
 			const { token } = authentication;
 			setDataAuth({ ...DataAuth, token });
 
 			//  API google para traerme info del usuario
-			fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${authentication.accessToken}`)
+			fetch(
+				`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${authentication.accessToken}`,
+			)
 				.then((res) => res.json())
 				.then((data) => {
 					const { name, email } = data;
@@ -60,15 +60,16 @@ export default function Login({ navigation }) {
 				<Text />
 				<Text />
 				<Text />
-				
-				<TextInput 
-					style={	styles.placeholder}
-					value={inputEmail} 
-					onChangeText={setInputEmail} 
-					placeholder="Ingresar email:     example@gmail.com" />
 
 				<TextInput
-					style={	styles.placeholder}
+					style={styles.placeholder}
+					value={inputEmail}
+					onChangeText={setInputEmail}
+					placeholder="Ingresar email:     example@gmail.com"
+				/>
+
+				<TextInput
+					style={styles.placeholder}
 					value={inputPassword}
 					onChangeText={setInputPassword}
 					placeholder="Ingresar Contraseña"
@@ -91,6 +92,10 @@ export default function Login({ navigation }) {
 						}
 					}}
 				/>
+
+				<Text />
+				<Text />
+
 				<Button
 					title="Registrar"
 					onPress={() => {
