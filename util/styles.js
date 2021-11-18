@@ -13,9 +13,24 @@ const styles = StyleSheet.create({
 	},
 	LoginGoogle: {
 		resizeMode: 'stretch',
-		width: 200,
+		width: 250,
 		height: 58,
 	},
+	ImageHome: {
+		resizeMode: 'stretch',
+		width: 250,
+		height: 200,
+	},
+	placeholder: {
+		height: 40,
+		width: 350,
+		borderBottomWidth: 1,
+		marginVertical: 30,
+		alignContent: "center",
+		marginLeft: 25,
+		marginRight: 25,
+		marginTop: 30,
+	  },	
 	principal: {
 		flex: 1,
 		backgroundColor: '#f0f8ff',

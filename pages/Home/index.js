@@ -3,63 +3,59 @@ import { ScrollView, Text, View, Button, StatusBar, TouchableOpacity, Image } fr
 import styles from '../../util/styles';
 import GlobalContext from '../../components/context';
 
-export default function Home({ navigation }) {
+export default function Home() {
 	const { DataAuth, setDataAuth } = useContext(GlobalContext);
 
 	return (
 		<ScrollView>
-
 			<View style={styles.container}>
-				
 				<StatusBar style="auto" />
 
-				<Text></Text>
-				<Text></Text>
-				<Text>Bienvenido : {DataAuth.name}</Text>
+				<Text />
+				<Text />
+				<Text />
+				<Text>Bienvenidxs {DataAuth.name}</Text>
 
-				<Text></Text>
-				<Text></Text>
+				<Text />
+				<Text />
+				<Text />
 
-				<Text>Imagen de sucursal Colonia</Text>
+				<Text>Sucursal Colonia</Text>
+				<Text />
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image
-						source={require('../../assets/sucursalColonia.jpeg')}
-						style={styles.LoginGoogle}
-					/>
+					<Image source={require('../../assets/phoneCuatro.png')} style={styles.ImageHome} />
 				</TouchableOpacity>
 
-				<Text></Text>
-				<Text></Text>
+				<Text />
+				<Text />
+				<Text />
 
-				<Text>Imagen de sucursal Mercedes</Text>
+				<Text>Ssucursal Mercedes</Text>
+				<Text />
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image
-						source={require('../../assets/sucursalMercedes.jpeg')}
-						style={styles.LoginGoogle}
-					/>
+					<Image source={require('../../assets/phoneTres.png')} style={styles.ImageHome} />
 				</TouchableOpacity>
 
-				<Text></Text>
-				<Text></Text>
-				<Text>Imagen de sucursal Fray Bentos</Text>
+				<Text />
+				<Text />
+				<Text />
+
+				<Text>Sucursal Fray Bentos</Text>
+				<Text />
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image
-						source={require('../../assets/phoneDos.png')}
-						style={styles.LoginGoogle}
-					/>
+					<Image source={require('../../assets/phoneDos.png')} style={styles.ImageHome} />
 				</TouchableOpacity>
 
-				<Text></Text>
-				<Text></Text>
-				<Text>Imagen de sucursal Montevideo</Text>
+				<Text />
+				<Text />
+				<Text />
+				<Text>Sucursal Montevideo</Text>
+				<Text />
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image
-						source={require('../../assets/phoneUno.png')}
-						style={styles.LoginGoogle}
-					/>
+					<Image source={require('../../assets/phoneUno.png')} style={styles.ImageHome} />
 				</TouchableOpacity>
 
-				<br></br>
+				<Text />
 
 				<Button
 					title="Salir"

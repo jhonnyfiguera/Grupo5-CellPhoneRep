@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import GlobalContext from '../context';
 import Login from '../../pages/Login';
 import TopTabsNavigator from '../TopTabsNavigator';
+import Detalle from '../../pages/Detalle';
 
 //Componente
 export default function StackNavigator() {
