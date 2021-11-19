@@ -31,7 +31,7 @@ export default ({ navigation, route }) => {
 				<Text />
 				<Text />
 				<Text />
-				<Text style={styles.titleCellPhone}>Eestado de la Reserva: {reserva.marca}</Text> {/* Estado */}
+				<Text style={styles.titleCellPhone}>Eestado de la Reserva: Pendiente </Text> {/* {reserva.marca} */}
 
 				<Text />
 				<Text />
@@ -43,10 +43,10 @@ export default ({ navigation, route }) => {
 				<Text />
 				{reserva.marca !== undefined ? (
 					<View>
-						<Text>{reserva.marca}</Text> {/* Tipo Reparacion  */}
-						<Text>{reserva.modelo}</Text> {/* Sucursal  */}
-						<Text>{reserva.color}</Text> {/* Dia  */}
-						<Text>{reserva.puertas}</Text> {/* Otra  */}
+						<Text>Tipo Reparacion: Pantalla</Text> {/* Tipo Reparacion  */}
+						<Text>Sucursal Seleccionada: Colonia</Text> {/* Sucursal  */}
+						<Text>Fecha: 18/11/2021</Text> {/* Dia  */}
+						<Text>Contacto</Text> {/* Otra  */}
 					</View>
 				) : (
 					<View>
@@ -59,11 +59,15 @@ export default ({ navigation, route }) => {
 				<Text />
 
 				<Button
-					title={'Mis Reservas'}
+					title="Cancelar Reserva"
 					onPress={() => {
-						navigation.navigate('MisReservas');
+					
 					}}
 				/>
+				
+				<Text />
+				<Text />
+
 				<Button
 					title="Salir"
 					onPress={() => {

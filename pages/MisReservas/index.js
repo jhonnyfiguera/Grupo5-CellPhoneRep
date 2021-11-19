@@ -58,7 +58,7 @@ export default ({ navigation }) => {
 							<TouchableOpacity onPress={() => navigation.navigate('Detalle', { id: item.id })}>
 								<View style={styles.listaReserva}>
 									<Text>
-										 - {item.modelo}
+										 - {item.id}
 									</Text>
 								</View>
 							</TouchableOpacity>
