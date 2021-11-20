@@ -62,7 +62,7 @@ export default function Login() {
 				<Text />
 				<Text />
 				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image source={require('../../assets/celular.png')} style={styles.ImageHome} />
+					<Image source={require('../../assets/celulartres.png')} style={styles.ImageHome} />
 				</TouchableOpacity>
 
 				<Text />

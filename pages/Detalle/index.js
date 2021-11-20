@@ -31,7 +31,7 @@ export default ({ navigation, route }) => {
 				<Text />
 				<Text />
 				<Text />
-				<Text style={styles.titleCellPhone}>Eestado de la Reserva: Pendiente </Text> {/* {reserva.marca} */}
+				<Text style={styles.titleCellPhone}>Estado de la Reserva: Pendiente </Text> {/* {reserva.marca} */}
 
 				<Text />
 				<Text />
