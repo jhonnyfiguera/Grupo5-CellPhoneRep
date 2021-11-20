@@ -1,5 +1,5 @@
 const constants = {
-    BASE_URL: 'https://us-central1-be-tp3-a.cloudfunctions.net/app/api'
+   BASE_URL: 'http://192.168.0.10:3000/api'
 }
 
 export {constants as Constants}
