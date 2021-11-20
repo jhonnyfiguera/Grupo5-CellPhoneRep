@@ -10,7 +10,7 @@ export default function Login() {
 	const { DataAuth, setDataAuth } = useContext(GlobalContext);
 
 	const [request, response, promptAsync] = Google.useAuthRequest({
-		expoClientId: '923761599304-fpugfprro1rr9e9hoeucgouhl8ahm6pi.apps.googleusercontent.com',
+		expoClientId: '705375110728-j1tuq48g14hm1ntuinrge9ds5i5n6ugq.apps.googleusercontent.com',
 		//Jhonny expoClientId: '705375110728-j1tuq48g14hm1ntuinrge9ds5i5n6ugq.apps.googleusercontent.com',
 		iosClientId: '923761599304-41hkeh1v3umtl2ntm5vht4j8ld9ch2sv.apps.googleusercontent.com',
 		androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
@@ -59,6 +59,12 @@ export default function Login() {
 
 				<Text />
 				<Text />
+				<Text />
+				<Text />
+				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+					<Image source={require('../../assets/celulartres.png')} style={styles.ImageHome} />
+				</TouchableOpacity>
+
 				<Text />
 
 				<TextInput

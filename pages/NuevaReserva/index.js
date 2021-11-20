@@ -24,7 +24,7 @@ export default function NuevaReserva({ navigation }) {
     <ScrollView>
       <View style={styles.container}>
         <StatusBar style={"auto"} />
-        <Text style={styles.titleCellPhone}>Página en construcción</Text>
+        <Text style={styles.titleCellPhone}>En construcción</Text>
         <Text />
         <Text />
 
