@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { block } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
 	container: {
@@ -6,6 +7,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
+		borderWidth: 0.2,
+		borderColor: 'gray',
 	},
 	titleCellPhone: {
 		fontSize: 25,
@@ -109,6 +112,19 @@ const styles = StyleSheet.create({
 	},
 	linkOlvidaste: {
 		color: 'blue',
+	},
+	
+	//Patricia 
+	imageLogo: {
+		resizeMode: 'stretch',
+		width: 400,
+		height: 500,
+	},
+	iconoGoogle: {
+		resizeMode: 'stretch',
+		width: 200,
+		height: 70,
+
 	},
 });
 

@@ -10,9 +10,9 @@ export default function Login() {
 	const { DataAuth, setDataAuth } = useContext(GlobalContext);
 
 	const [request, response, promptAsync] = Google.useAuthRequest({
-		expoClientId: '705375110728-j1tuq48g14hm1ntuinrge9ds5i5n6ugq.apps.googleusercontent.com',
+		expoClientId: '923761599304-72hkb7u0psigramb10rpanouab6e3bi2.apps.googleusercontent.com',
+		iosClientId: '923761599304-br2np2655l0oqq4r4uujqldoo0oiqv4t.apps.googleusercontent.com',
 		//Jhonny expoClientId: '705375110728-j1tuq48g14hm1ntuinrge9ds5i5n6ugq.apps.googleusercontent.com',
-		iosClientId: '923761599304-41hkeh1v3umtl2ntm5vht4j8ld9ch2sv.apps.googleusercontent.com',
 		androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
 		webClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
 	});

@@ -1,69 +1,72 @@
-import React, { useContext } from 'react';
-import { ScrollView, Text, View, Button, StatusBar, TouchableOpacity, Image } from 'react-native';
-import styles from '../../util/styles';
-import GlobalContext from '../../components/context';
+import React, { useState, useEffect, useContext } from "react";
+import {
+  ScrollView,
+  Text,
+  View,
+  Button,
+  StatusBar,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import styles from "../../util/styles";
+import GlobalContext from "../../components/context";
+import { Constants } from "../../util/constants";
 
 export default function Home() {
-	const { DataAuth, setDataAuth } = useContext(GlobalContext);
+  const { DataAuth, setDataAuth } = useContext(GlobalContext);
+  const [sucursales, setSucursales] = useState([]);
+  const isAuthenticated = DataAuth.token !== "";
 
-	return (
-		<ScrollView>
-			<View style={styles.container}>
-				<StatusBar style="auto" />
+  //Obtener todas las sucursales
+  let headers = new Headers({
+    Authorization: `Bearer ${DataAuth.token}`,
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  });
 
-				<Text />
-				<Text />
-				<Text />
-				<Text style={styles.titleCellPhone}>Bienvenid@ {DataAuth.name}</Text>
+  const cargarSucursales = () => {
+    fetch(`${Constants.BASE_URL}/offices`, {
+      method: "GET",
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => setSucursales(data))
+      .catch((error) => console.error(error));
+  };
 
-				<Text />
-				<Text />
-				<Text />
+  if (isAuthenticated) {
+    useEffect(() => {
+      cargarSucursales();
+    }, []);
+  }
 
-				<Text>Sucursal Colonia</Text>
-				<Text />
-				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image source={require('../../assets/sucursalColonia.png')} style={styles.ImageHome} />
-				</TouchableOpacity>
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
 
-				<Text />
-				<Text />
-				<Text />
+        {sucursales.length > 0 ? (
+          sucursales.map((sucursal) => (
+            <View key={sucursal._id} >
+			  <Text />
+              <Text>{sucursal.name}</Text>
+			  <Text />
+              <Text>{sucursal.address} </Text>
+			  <Text />
+              <Text>{sucursal.phone} </Text>
+            </View>
+          ))
+        ) : (
+          <Text>"No hay nada" </Text>
+        )}
 
-				<Text>Sucursal Mercedes</Text>
-				<Text />
-				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image source={require('../../assets/sucursalMercedes.png')} style={styles.ImageHome} />
-				</TouchableOpacity>
-
-				<Text />
-				<Text />
-				<Text />
-
-				<Text>Sucursal Fray Bentos</Text>
-				<Text />
-				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image source={require('../../assets/phoneDos.png')} style={styles.ImageHome} />
-				</TouchableOpacity>
-
-				<Text />
-				<Text />
-				<Text />
-				<Text>Sucursal Montevideo</Text>
-				<Text />
-				<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-					<Image source={require('../../assets/phoneUno.png')} style={styles.ImageHome} />
-				</TouchableOpacity>
-
-				<Text />
-
-				<Button
-					title="Salir"
-					onPress={() => {
-						setDataAuth({});
-					}}
-				/>
-			</View>
-		</ScrollView>
-	);
+        <Button
+          title="Salir"
+          onPress={() => {
+            setDataAuth({});
+          }}
+        />
+      </View>
+    </ScrollView>
+  );
 }

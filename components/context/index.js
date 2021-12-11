@@ -1,11 +1,12 @@
 import React from "react";
 
 const authData = {
-    token: "Vacio",
+    token: "",
     email: "",
     password: "",
     name: "",
     phone: 0,
+    userId: "",
 }
 
 export { authData }
