@@ -31,10 +31,13 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-tab-view": "^3.1.1",
+    "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@types/react-native": "^0.66.8",
+    "@types/react-native-vector-icons": "^6.4.10"
   },
   "private": true
 }

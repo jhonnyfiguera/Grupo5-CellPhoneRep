@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import GlobalContext from '../context';
-import Login from '../../pages/Login';
-import TopTabsNavigator from '../TopTabsNavigator';
+import LoginGoogle from '../../pages/LoginGoogle';
+import BottomTabsNavigator from '../BottomTabsNavigator';
 import Detalle from '../../pages/Detalle';
 import NuevaReserva from '../../pages/NuevaReserva';
 import MisReservas from '../../pages/MisReservas';
@@ -12,15 +12,15 @@ export default function StackNavigator() {
 
 	const Stack = createStackNavigator();
 
-	const isAuthenticated = () => DataAuth.email !== undefined;
+	const isAuthenticated = () => DataAuth.email !== undefined && DataAuth.token !== undefined;
 
 	return (
 		<GlobalContext.Provider value={{ DataAuth, setDataAuth }}>
 			{isAuthenticated() ? (
 				<Stack.Navigator>
 					<Stack.Screen
-						name={'TopTabsNavigator'}
-						component={TopTabsNavigator}
+						name={'BottomTabsNavigator'}
+						component={BottomTabsNavigator}
 						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
@@ -42,8 +42,8 @@ export default function StackNavigator() {
 			) : (
 				<Stack.Navigator>
 					<Stack.Screen 
-						name={'Login'} 
-						component={Login} 
+						name={'LoginGoogle'} 
+						component={LoginGoogle} 
 						options={{ headerShown: false }} 
 					/>
 				</Stack.Navigator>
