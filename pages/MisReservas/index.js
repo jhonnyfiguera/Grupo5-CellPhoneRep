@@ -1,27 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
   ScrollView,
-  FlatList,
   StatusBar,
   Text,
   TouchableOpacity,
   View,
-  Button,
-  Row,
+  StyleSheet,
   Alert,
 } from "react-native";
 import { Constants } from "../../util/constants";
-import styles from "../../util/styles";
 import GlobalContext from "../../components/context";
+import Icon from "react-native-vector-icons/Octicons";
 
 export default ({ navigation }) => {
-  const { DataAuth, setDataAuth } = useContext(GlobalContext);
+  const { DataAuth } = useContext(GlobalContext);
   const [reservas, setReservas] = useState([]);
   const isAuthenticated = DataAuth.token !== "";
-  const {error, setError} = useState("");
+  const [modifica, setModifica] = useState("");
 
   //Headers
-  let headers = new Headers({
+  const headers = new Headers({
+    Authorization: `Bearer ${DataAuth.token}`,
     Accept: "application/json",
     "Content-Type": "application/json",
   });
@@ -36,8 +35,7 @@ export default ({ navigation }) => {
       .then((data) => {
         setReservas(data);
       })
-      //.catch((error) => { setError(error.message) });
-       .catch(error => alert(error.message))
+      .catch((error) => console.error(error.message));
   };
 
   if (isAuthenticated) {
@@ -45,6 +43,21 @@ export default ({ navigation }) => {
       cargarReservas();
     }, []);
   }
+
+  if (isAuthenticated) {
+    useEffect(() => {
+      cargarReservas();
+      setModifica("");
+    }, [modifica]);
+  }
+
+  //Revisar
+  /*
+  if (isAuthenticated) {
+    useEffect(() => {
+      cargarReservas();
+      }, [reservas]);
+  }*/
 
   //Cancelar Reserva
   const cancelarReserva = (reservaId) => {
@@ -57,68 +70,139 @@ export default ({ navigation }) => {
       .catch((error) => console.error(error));
   };
 
-
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View style={sReservas.container}>
         <StatusBar style={"auto"} />
-        <Text />
-        <Button
+
+        <TouchableOpacity
+          style={sReservas.viewNueva}
           title={"Nueva Reserva"}
           onPress={() => {
             navigation.navigate("NuevaReserva");
           }}
-        />
-        <Text />
+        >
+          <Icon name="diff-added" size={30} color="#f8faf7" />
+        </TouchableOpacity>
+        <Text style={sReservas.titlePrincipal}>Mis Reservas</Text>
         {reservas.length > 0 ? (
-          (reservas.sort((a,b) => (a.state < b.state) ? 1: -1)).map((reserva) => (
-            <View key={reserva._id}>
-              <Text />
-              <Text>Fecha: {reserva.date} </Text>
-              <Text />
-              <Text>Sucursal: {reserva.office.name} </Text>
-              <Text />
-              <Text>Comentario: {reserva.additionalComment}</Text>
-              <Text />
-              <Text>Costo estimado: ${reserva.estimatedRepairCost}</Text>
-              <Text />
-              <Text>
-                Reparaciones a realizar del celular: {reserva.phone.name}
-              </Text>
-              {reserva.itemsRepairs.map((item) => (
-                <View key={item._id}>
-                  <Text />
-                  <Text> * {item.name} </Text>
+          reservas
+            .sort((a, b) => (a.state < b.state ? 1 : -1))
+            .map((reserva) => (
+              <View key={reserva._id}>
+                <View style={sReservas.viewCancelar}>
+                  {reserva.state === "Pendiente" ? (
+                    <TouchableOpacity
+                      title={"Cancelar Reserva"}
+                      onPress={() => {
+                        cancelarReserva(reserva._id);
+                        setModifica("modifica");
+                        Alert.alert("Reserva cancelada");
+                      }}
+                    >
+                      <Icon name="trashcan" size={24} color="#f8faf7" />
+                    </TouchableOpacity>
+                  ) : (
+                    <Text />
+                  )}
                 </View>
-              ))}
 
-              <Text />
-              <Text>
-                {reserva.state === "Pendiente" ? (
-                  <Button
-                    title="Cancelar Reserva"
-                    onPress={() => {
-                    cancelarReserva(reserva._id);
-                      Alert.alert("Oka", "Se efectuaron los cambios");
-                    }}
-                  />
-                ) : (
-                  <Text />
-                )}
-              </Text>
-            </View>
-          ))
+                <Text style={sReservas.titlePendiente}>{reserva.state}</Text>
+
+                <Text style={sReservas.titleSecundario}>
+                  <Icon name="calendar" size={20} color="#f8faf7" />
+                  {"  "}
+                  {reserva.date}
+                </Text>
+
+                <Text style={sReservas.titleSecundario}>
+                  <Icon name="location" size={20} color="#f8faf7" />
+                  {"  "}
+                  {reserva.office.name}
+                </Text>
+
+                <Text style={sReservas.titleSecundario}>
+                  <Icon name="comment-discussion" size={20} color="#f8faf7" />
+                  {"  "}
+                  {reserva.additionalComment}
+                </Text>
+
+                <Text style={sReservas.titleSecundario}>
+                  <Icon name="credit-card" size={20} color="#f8faf7" />
+                  {"  $"}
+                  {reserva.estimatedRepairCost}
+                </Text>
+
+                <Text style={sReservas.titleSecundario}>
+                  <Icon name="device-mobile" size={20} color="#f8faf7" />
+                  {"  "}
+                  {reserva.phone.name}
+                </Text>
+
+                {reserva.itemsRepairs.map((item) => (
+                  <View key={item._id}>
+                    <Text style={sReservas.titleSecundario}>
+                      <Icon name="tools" size={20} color="#f8faf7" />
+                      {"  "}
+                      {item.name}
+                    </Text>
+                  </View>
+                ))}
+
+                <Text style={sReservas.linea} />
+              </View>
+            ))
         ) : (
-          <Text>"No hay nada"  {error}</Text>
+          <Text>Sin reservas</Text>
         )}
       </View>
-      <Text />
-      <Button
-        title="Salir"
-        onPress={() => {
-          setDataAuth({});
-        }}
-      />
     </ScrollView>
   );
 };
+
+//Estilos de MisReservas
+const sReservas = StyleSheet.create({
+  container: {
+    backgroundColor: "#393951",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 0.2,
+    borderColor: "gray",
+    width: 375,
+  },
+  titlePrincipal: {
+    fontSize: 25,
+    color: "white",
+    fontWeight: "bold",
+    padding: 5,
+    paddingBottom: 10,
+    paddingTop: 30,
+  },
+  titleSecundario: {
+    fontSize: 15,
+    color: "#f8faf7",
+    padding: 9,
+    paddingLeft: 20,
+  },
+  titlePendiente: {
+    fontSize: 22,
+    color: "white",
+    fontWeight: "bold",
+    padding: 9,
+    paddingLeft: 20,
+  },
+  linea: {
+    backgroundColor: "#A2A2A2",
+    height: 3,
+    width: 320,
+    marginTop: 1,
+    marginBottom: 20,
+  },
+  viewCancelar: {
+    paddingLeft: 20,
+  },
+  viewNueva: {
+    paddingTop: 20,
+  },
+});

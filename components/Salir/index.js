@@ -1,27 +1,12 @@
-/* import React, { useEffect, useState, useContext } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import GlobalContext, {authData} from '../context';
-import StackNavigator from '../StackNavigator';
+import { useEffect, useContext } from "react";
+import Globalcontext from "../context";
 
 export default function Salir() {
-    
-    useState({authData});
-    const context = useContext(GlobalContext);
+  const { setDataAuth } = useContext(Globalcontext);
 
-    function salir() {
-        {
-            authData.email ==
-        };
-    }
+  useEffect(() => {
+    setDataAuth({});
+  }, []);
 
-    useEffect(() => {
-        context.
-        context.cambioDatos('', '','','');
-        <NavigationContainer>
-			<StackNavigator />
-		</NavigationContainer>
-  
-    }, [])
-
-    return null;
-} */
+  return null;
+}
