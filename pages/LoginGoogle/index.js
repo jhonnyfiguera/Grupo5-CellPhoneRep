@@ -18,10 +18,11 @@ import { Constants } from "../../util/constants";
 export default function Login() {
   const { DataAuth, setDataAuth } = useContext(GlobalContext);
 
-  //Headers
-  let headers = new Headers({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
+   //Headers
+   const headers = new Headers({
+    Authorization: `Bearer ${DataAuth.token}`,
+    Accept: "application/json",
+    "Content-Type": "application/json",
   });
 
   //Add y login de usuario
