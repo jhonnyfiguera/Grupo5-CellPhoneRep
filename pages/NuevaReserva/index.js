@@ -19,7 +19,7 @@ export default function NuevaReserva({ navigation }) {
   const [celulares, setCelulares] = useState([]);
   const [reparaciones, setReparaciones] = useState([]);
   const [sucursales, setSucursales] = useState([]);
-  const isAuthenticated = DataAuth.token !== "";
+  //const isAuthenticated = DataAuth.token !== "";
 
   const [inputCelular, setInputCelular] = useState({});
   const [inputReparar, setInputReparar] = useState({});
@@ -67,7 +67,7 @@ export default function NuevaReserva({ navigation }) {
       .catch((error) => console.error(error));
   };
 
-  if (isAuthenticated) {
+ //if (isAuthenticated) {
     useEffect(() => {
       cargarCelulares();
     }, []);
@@ -77,7 +77,7 @@ export default function NuevaReserva({ navigation }) {
     useEffect(() => {
       cargarSucursales();
     }, []);
-  }
+  //}
 
   //Add nueva reserva
   const agregarReserva = () => {
@@ -101,6 +101,7 @@ export default function NuevaReserva({ navigation }) {
       }),
     })
       .then((response) => response.json())
+      .then((data) => console.log(data))
       .catch((error) => alert(error.message));
   };
 
@@ -224,7 +225,7 @@ const sNuevaR = StyleSheet.create({
   },
   cardPicker: {
     width: 250,
-    height: 45,
+    height: 50,
     backgroundColor: "#92a1cf",
     justifyContent: "center",
     marginTop: 55,

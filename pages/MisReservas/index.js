@@ -67,6 +67,7 @@ export default ({ navigation }) => {
       body: JSON.stringify({ _id: reservaId }),
     })
       .then((response) => response.json())
+      .then((data) => console.log(data))
       .catch((error) => console.error(error));
   };
 
