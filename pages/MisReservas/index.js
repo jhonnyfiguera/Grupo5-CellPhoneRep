@@ -84,7 +84,8 @@ export default ({ navigation }) => {
         >
           <Icon name="diff-added" size={30} color="#f8faf7" />
         </TouchableOpacity>
-        <Text style={sReservas.titlePrincipal}>Mis Reservas</Text>
+        <Text style={sReservas.titlePrincipal}>Registro de reservas</Text>
+        <Text style={sReservas.lineaInicial} />
         {reservas.length > 0 ? (
           reservas
             .sort((a, b) => (a.state < b.state ? 1 : -1))
@@ -153,7 +154,7 @@ export default ({ navigation }) => {
               </View>
             ))
         ) : (
-          <Text>Sin reservas</Text>
+          <Text></Text>
         )}
       </View>
     </ScrollView>
@@ -194,10 +195,17 @@ const sReservas = StyleSheet.create({
   },
   linea: {
     backgroundColor: "#A2A2A2",
-    height: 3,
+    height: 1,
     width: 320,
     marginTop: 1,
     marginBottom: 20,
+  },
+  lineaInicial: {
+    backgroundColor: "#A2A2A2",
+    height: 1,
+    width: 320,
+    marginTop: 1,
+    marginBottom: 10,
   },
   viewCancelar: {
     paddingLeft: 20,
