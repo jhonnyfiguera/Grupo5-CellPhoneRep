@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import {
-  ScrollView,
   Text,
   View,
   TouchableOpacity,
@@ -37,61 +36,59 @@ export default () => {
   };
 
   return (
-    
-      <View style={sDatos.container}>
-        <StatusBar style={"auto"} />
-        <Text style={sDatos.titlePrincipal}>Mis Datos</Text>
+    <View style={sDatos.container}>
+      <StatusBar style={"auto"} />
+      <Text style={sDatos.titlePrincipal}>Mis Datos</Text>
 
-        <View style={sDatos.cardView}>
-          <Card style={sDatos.cardDatos}>
-            <Card.Content style={sDatos.cardContentDatos}>
-              <Text style={sDatos.titleSecundario}>
-                <Icon name="person" size={25} color="#f8faf7" />
-                {"  "}
-                {DataAuth.name}
-              </Text>
-              <Text style={sDatos.titleSecundario}>
-                <Icon name="mail-read" size={25} color="#f8faf7" />
-                {"  "}
-                {DataAuth.email}
-              </Text>
-              <Text style={sDatos.titleSecundario}>
-                <Icon name="device-mobile" size={25} color="#f8faf7" />
-                {"  "}
-                {DataAuth.phone}
-              </Text>
-            </Card.Content>
-          </Card>
-        </View>
-
-        <Text style={sDatos.linea} />
-
-        <Text style={sDatos.titlePrincipal}> Actualiza Contacto</Text>
-        <View style={sDatos.cardView}>
-          <Card style={sDatos.card}>
-            <Card.Content style={sDatos.cardContent}>
-              <TextInput
-                value={phone}
-                onChangeText={setPhone}
-                placeholder="Teléfono"
-                placeholderTextColor="#000000"
-              />
-            </Card.Content>
-          </Card>
-        </View>
-
-        <TouchableOpacity
-          onPress={() => {
-            setDataAuth({ ...DataAuth, phone });
-            setPhone("");
-            Alert.alert("Contacto actualizado");
-            actualizarContacto();
-          }}
-        >
-          <Icon name="cloud-upload" size={50} color="#f8faf7" />
-        </TouchableOpacity>
+      <View style={sDatos.cardView}>
+        <Card style={sDatos.cardDatos}>
+          <Card.Content style={sDatos.cardContentDatos}>
+            <Text style={sDatos.titleSecundario}>
+              <Icon name="person" size={25} color="#f8faf7" />
+              {"  "}
+              {DataAuth.name}
+            </Text>
+            <Text style={sDatos.titleSecundario}>
+              <Icon name="mail-read" size={25} color="#f8faf7" />
+              {"  "}
+              {DataAuth.email}
+            </Text>
+            <Text style={sDatos.titleSecundario}>
+              <Icon name="device-mobile" size={25} color="#f8faf7" />
+              {"  "}
+              {DataAuth.phone}
+            </Text>
+          </Card.Content>
+        </Card>
       </View>
-  
+
+      <Text style={sDatos.linea} />
+
+      <Text style={sDatos.titlePrincipal}> Actualiza Contacto</Text>
+      <View style={sDatos.cardView}>
+        <Card style={sDatos.card}>
+          <Card.Content style={sDatos.cardContent}>
+            <TextInput
+              value={phone}
+              onChangeText={setPhone}
+              placeholder="Teléfono"
+              placeholderTextColor="#000000"
+            />
+          </Card.Content>
+        </Card>
+      </View>
+
+      <TouchableOpacity
+        onPress={() => {
+          setDataAuth({ ...DataAuth, phone });
+          setPhone("");
+          Alert.alert("Contacto actualizado");
+          actualizarContacto();
+        }}
+      >
+        <Icon name="cloud-upload" size={50} color="#f8faf7" />
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -143,7 +140,7 @@ const sDatos = StyleSheet.create({
   },
   card: {
     width: 220,
-    height: 45,
+    height: 5,
     backgroundColor: "#fff",
   },
   cardContent: {

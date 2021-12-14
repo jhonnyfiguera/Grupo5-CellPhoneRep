@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
-  FlatList,
   StatusBar,
-  Text,
   TouchableOpacity,
   View,
   TextInput,
-  Button,
   Alert,
-  Picker,
+  StyleSheet,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import { ScrollView } from "react-native-gesture-handler";
-import styles from "../../util/styles";
 import Globalcontext from "../../components/context";
 import { Constants } from "../../util/constants";
-
+import { Card } from "react-native-paper";
+import Icon from "react-native-vector-icons/Octicons";
 
 export default function NuevaReserva({ navigation }) {
-  const { DataAuth, setDataAuth } = useContext(Globalcontext);
+  const { DataAuth } = useContext(Globalcontext);
   const [celulares, setCelulares] = useState([]);
   const [reparaciones, setReparaciones] = useState([]);
   const [sucursales, setSucursales] = useState([]);
@@ -28,7 +26,6 @@ export default function NuevaReserva({ navigation }) {
   const [inputSucursal, setInputSucursal] = useState({});
   const [inputFecha, setInputFecha] = useState("");
   const [inputComentario, setInputComentario] = useState("");
-  const [inputUsuario, setInputUsuario] = useState({});
 
   //Headers
   const headers = new Headers({
@@ -104,76 +101,103 @@ export default function NuevaReserva({ navigation }) {
       }),
     })
       .then((response) => response.json())
-      .catch((error) => alert((error.message)));
+      .catch((error) => alert(error.message));
   };
 
   return (
     <ScrollView>
-      <View>
-        <View>
+      <StatusBar style={"auto"} />
+      {/*Pickers para selección */}
+      <View style={sNuevaR.containerPicker}>
+        <View style={sNuevaR.cardPicker}>
           <Picker
+            style={sNuevaR.itemPicker}
             selectedValue={inputSucursal}
-            onValueChange={(itemValue, itemIndex) =>
-              setInputSucursal(itemValue)
-            }
+            onValueChange={(itemValue) => setInputSucursal(itemValue)}
           >
-            <Picker.Item label="Seleccionar sucursal" />
+            <Picker.Item label="Seleccionar Sucursal" color="#393951" />
             {sucursales.map((item, key) => (
-              <Picker.Item label={item.name} value={item.name} key={key} />
+              <Picker.Item
+                height={false}
+                label={item.name}
+                value={item.name}
+                key={key}
+                color="#393951"
+              />
             ))}
           </Picker>
         </View>
-
-        <View>
+        <View style={sNuevaR.cardPicker}>
           <Picker
+            style={sNuevaR.itemPicker}
             selectedValue={inputCelular}
-            onValueChange={(itemValue, itemIndex) => setInputCelular(itemValue)}
+            onValueChange={(itemValue) => setInputCelular(itemValue)}
           >
-            <Picker.Item label="Seleccionar celular" />
+            <Picker.Item label="Seleccionar Celular" color="#393951" />
             {celulares.map((item, key) => (
-              <Picker.Item label={item.name} value={item.name} key={key} />
+              <Picker.Item
+                height={false}
+                label={item.name}
+                value={item.name}
+                key={key}
+                color="#393951"
+              />
             ))}
           </Picker>
         </View>
-
-        <View>
+        <View style={sNuevaR.cardPicker}>
           <Picker
+            style={sNuevaR.itemPicker}
             selectedValue={inputReparar}
-            onValueChange={(itemValue, itemIndex) => setInputReparar(itemValue)}
+            onValueChange={(itemValue) => setInputReparar(itemValue)}
           >
-            <Picker.Item label="Seleccionar reparación" />
+            <Picker.Item label="Seleccionar Reparación" color="#393951" />
             {reparaciones.map((item, key) => (
-              <Picker.Item label={item.name} value={item.name} key={key} />
+              <Picker.Item
+                height={false}
+                label={item.name}
+                value={item.name}
+                key={key}
+                color="#393951"
+              />
             ))}
           </Picker>
         </View>
       </View>
-
-      <View style={styles.container}>
-        <StatusBar style={"auto"} />
-
-        <TextInput
-          value={inputFecha}
-          onChangeText={setInputFecha}
-          placeholder="Ingresa fecha"
-        />
-        <Text />
-        <Text />
-
-        <TextInput
-          value={inputComentario}
-          onChangeText={setInputComentario}
-          placeholder="Ingresa comentario"
-        />
-        <Text />
-        <Text />
-
-        <Button
-          title="Guardar cambios"
+      {/*Carss para ingresar y botón*/}
+      <View style={sNuevaR.container}>
+        <View style={sNuevaR.cardView}>
+          <Card style={sNuevaR.card}>
+            <Card.Content style={sNuevaR.cardContent}>
+              <TextInput
+                value={inputFecha}
+                onChangeText={setInputFecha}
+                placeholder="Ingresar Fecha"
+                placeholderTextColor="#000000"
+              />
+            </Card.Content>
+          </Card>
+        </View>
+        <View style={sNuevaR.cardView}>
+          <Card style={sNuevaR.card}>
+            <Card.Content style={sNuevaR.cardContent}>
+              <TextInput
+                value={inputComentario}
+                onChangeText={setInputComentario}
+                placeholder="Ingresar Comentario"
+                placeholderTextColor="#000000"
+              />
+            </Card.Content>
+          </Card>
+        </View>
+        <TouchableOpacity
+          style={sNuevaR.boton}
           onPress={() => {
             if (inputCelular && inputReparar && inputFecha && inputSucursal) {
               agregarReserva();
-              Alert.alert("Reserva generada, presiona Back para volver o ingrese nueva reserva");
+              Alert.alert(
+                "Reserva generada, presiona Back para volver o ingrese nueva reserva"
+              );
               setInputCelular({});
               setInputReparar({});
               setInputSucursal({});
@@ -183,9 +207,60 @@ export default function NuevaReserva({ navigation }) {
               Alert.alert("Faltan datos");
             }
           }}
-        />
-        <Text />
+        >
+          <Icon name="cloud-upload" size={50} color="#f8faf7" />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
 }
+
+//Estilos de MisReservas
+const sNuevaR = StyleSheet.create({
+  containerPicker: {
+    backgroundColor: "#393951",
+    flex: 1,
+    width: 375,
+  },
+  cardPicker: {
+    width: 250,
+    height: 45,
+    backgroundColor: "#92a1cf",
+    justifyContent: "center",
+    marginTop: 55,
+    marginLeft: 60,
+    borderRadius: 8,
+  },
+  itemPicker: {
+    width: 250,
+    justifyContent: "center",
+  },
+  container: {
+    backgroundColor: "#393951",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 0.2,
+    borderColor: "gray",
+    width: 375,
+    height: 320,
+  },
+  cardView: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  card: {
+    width: 250,
+    height: 50,
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    marginTop: 40,
+  },
+  cardContent: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  boton: {
+    marginTop: 40,
+  },
+});

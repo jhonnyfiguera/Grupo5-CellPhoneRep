@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ScrollView, Text, View, StatusBar, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  Text,
+  View,
+  StatusBar,
+  StyleSheet,
+  Image,
+} from "react-native";
 import GlobalContext from "../../components/context";
 import { Constants } from "../../util/constants";
 import Icon from "react-native-vector-icons/Octicons";
@@ -40,6 +47,10 @@ export default function Home() {
     <ScrollView>
       <View style={sHome.container}>
         <StatusBar style="auto" />
+        <Image
+          source={require("../../assets/celReparacion.png")}
+          style={sHome.imageLogo}
+        />
         {sucursales.length > 0 ? (
           sucursales.map((sucursal) => (
             <View key={sucursal._id} stylesHome="">
@@ -76,7 +87,7 @@ const sHome = StyleSheet.create({
     borderWidth: 0.2,
     borderColor: "gray",
     width: 375,
-    height: 750,
+    //height: 750,
   },
   titlePrincipal: {
     fontSize: 25,
@@ -96,5 +107,11 @@ const sHome = StyleSheet.create({
     width: 320,
     marginTop: 1,
     marginBottom: 20,
+  },
+  imageLogo: {
+    marginTop: 2,
+    resizeMode: "stretch",
+    width: 320,
+    height: 200,
   },
 });

@@ -15,14 +15,10 @@ export default function BottomTabsNavigator() {
         name={"Home"}
         component={Home}
         options={{
-          title: "",
+          title: "Sucursales",
           tabBarLabel: "Sucursales",
-          tabBarIcon: ({ black, size }) => (
-            <MaterialCommunityIcons
-              name="home-group"
-              color={black}
-              size={size}
-            />
+          tabBarIcon: ({ black }) => (
+            <MaterialCommunityIcons name="home-group" color={black} size={35} />
           ),
         }}
       />
@@ -31,13 +27,13 @@ export default function BottomTabsNavigator() {
         name={"Datos Personales"}
         component={DatosPersonales}
         options={{
-          title: "",
-          tabBarLabel: "Mis Datos",
-          tabBarIcon: ({ black, size }) => (
+          title: "Cuenta",
+          tabBarLabel: "Cuenta",
+          tabBarIcon: ({ black }) => (
             <MaterialCommunityIcons
               name="account-circle"
               color={black}
-              size={size}
+              size={35}
             />
           ),
         }}
@@ -46,13 +42,13 @@ export default function BottomTabsNavigator() {
         name={"Mis Reservas"}
         component={MisReservas}
         options={{
-          title: "",
-          tabBarLabel: "Mis Reservas",
-          tabBarIcon: ({ black, size }) => (
+          title: "Mis Reservas",
+          tabBarLabel: "Reservas",
+          tabBarIcon: ({ black }) => (
             <MaterialCommunityIcons
               name="cellphone-cog"
               color={black}
-              size={size}
+              size={35}
             />
           ),
         }}
@@ -63,12 +59,8 @@ export default function BottomTabsNavigator() {
         options={{
           title: "",
           tabBarLabel: "Salir",
-          tabBarIcon: ({ black, size }) => (
-            <MaterialCommunityIcons
-              name="arrow-left-bold-box-outline"
-              color={black}
-              size={size}
-            />
+          tabBarIcon: ({ black }) => (
+            <MaterialCommunityIcons name="logout" color={black} size={35} />
           ),
         }}
       />

@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { block } from "react-native-reanimated";
 
 const styles = StyleSheet.create({
   //Generales
