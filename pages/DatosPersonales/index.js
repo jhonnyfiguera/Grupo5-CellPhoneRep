@@ -32,6 +32,7 @@ export default () => {
       body: JSON.stringify({ _id: DataAuth.userId, phone: phone }),
     })
       .then((response) => response.json())
+      .then((data) => console.log(data))
       .catch((error) => console.error(error));
   };
 
@@ -140,7 +141,7 @@ const sDatos = StyleSheet.create({
   },
   card: {
     width: 220,
-    height: 5,
+    height: 50,
     backgroundColor: "#fff",
   },
   cardContent: {

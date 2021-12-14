@@ -87,7 +87,6 @@ const sHome = StyleSheet.create({
     borderWidth: 0.2,
     borderColor: "gray",
     width: 375,
-    //height: 750,
   },
   titlePrincipal: {
     fontSize: 25,
